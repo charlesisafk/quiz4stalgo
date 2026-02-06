@@ -2,6 +2,9 @@
 
 A React-based project management system with role-based access control, featuring project and task management capabilities similar to ClickUp.
 
+Backend Partner Repository: https://github.com/cvbal24/CBQuiz4.git
+
+
 ## Features
 
 ### Role-Based Authentication
