@@ -1,72 +1,183 @@
-# Getting Started with Create React App
+# Project Management System - Frontend
 
-**After cloning the project, run `npm install` to install the dependencies.**
+A React-based project management system with role-based access control, featuring project and task management capabilities similar to ClickUp.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+
+### Role-Based Authentication
+- Admin, Manager, and User roles
+- Protected routes based on user permissions
+- Secure login/logout functionality
+
+### Dashboard
+- View all projects (Admin) or assigned projects (Manager/User)
+- Simple table view with project details
+- Direct navigation to project details
+
+### Project Management
+- Create projects (Admin only)
+- View project details with all information
+- Track project status, dates, and hours consumed
+- Manage assigned users
+
+### Task Management
+- Create tasks within projects (Admin & Manager)
+- View all project tasks in detail screen
+- Track task status and assignments
+- Accessible from project detail page
+
+### User Management
+- Create users (Admin only)
+- List all registered users (Admin only)
+- Assign roles (Admin, Manager, User)
+- Permission-based access control
+
+## Technology Stack
+
+- **React** - Frontend framework
+- **Redux** - State management
+- **React Router** - Routing and navigation
+- **React Bootstrap** - UI components
+- **Axios** - HTTP client
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/charlesisafk/quiz4stalgo.git
+cd frontend-template
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start the development server
+```bash
+npm start
+```
+
+The application will open at [http://localhost:3000](http://localhost:3000)
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm build`
+Builds the app for production to the `build` folder
 
 ### `npm test`
+Launches the test runner in interactive watch mode
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `npm eject`
+Ejects from Create React App (one-way operation)
 
-### `npm run build`
+## Test Credentials
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For development/testing with dummy data:
+- **Admin**: username: `admin`, password: `admin123`
+- **Manager**: username: `manager`, password: `manager123`
+- **User**: username: `user`, password: `user123`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+src/
+├── actions/          # Redux actions
+│   ├── projectActions.js
+│   ├── taskActions.js
+│   └── userActions.js
+├── components/       # Reusable components
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── PrivateRoute.jsx
+│   └── ...
+├── constants/        # Redux action types
+│   ├── projectConstants.js
+│   ├── taskConstants.js
+│   └── userConstants.js
+├── reducers/         # Redux reducers
+│   ├── projectReducers.js
+│   ├── taskReducers.js
+│   └── userReducers.js
+├── screens/          # Page components
+│   ├── HomeScreen.jsx
+│   ├── LoginScreen.jsx
+│   ├── DetailScreen.jsx
+│   ├── ProjectCreateScreen.jsx
+│   ├── TaskCreateScreen.jsx
+│   ├── UserCreateScreen.jsx
+│   └── UserListScreen.jsx
+├── utils/            # Utility files
+│   └── dummyData.js
+├── App.js            # Main app component
+├── store.js          # Redux store configuration
+└── index.js          # Entry point
+```
 
-### `npm run eject`
+## Routes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `/` - Dashboard (Home)
+- `/login` - Login page
+- `/project/:id` - Project details (All authenticated users)
+- `/project/:id/createtask` - Create task (Admin & Manager only)
+- `/createproject` - Create project (Admin only)
+- `/createuser` - Create user (Admin only)
+- `/userlist` - User list (Admin only)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Access Control
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Admin
+- Full access to all features
+- Create projects
+- Create users
+- View all projects and users
+- Create and manage tasks
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Manager
+- View assigned projects
+- Create and manage tasks
+- View project details
 
-## Learn More
+### User
+- View assigned projects
+- View project and task details
+- Read-only access
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## API Integration
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application is designed to work with a backend API. Expected endpoints:
 
-### Code Splitting
+- `POST /api/v1/users/login/` - User login
+- `GET /api/v1/projects/` - List projects
+- `POST /api/v1/projects/create` - Create project
+- `GET /api/v1/projects/:id/` - Project details
+- `GET /api/v1/projects/:id/tasks/` - List tasks
+- `POST /api/v1/projects/:id/task/create/` - Create task
+- `GET /api/v1/users/` - List users
+- `POST /api/v1/users/create/` - Create user
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
+This project is licensed under the MIT License.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contact
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Link: [https://github.com/charlesisafk/quiz4stalgo](https://github.com/charlesisafk/quiz4stalgo)
